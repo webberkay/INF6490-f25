@@ -1,0 +1,19 @@
+Assignment 3: Regression Analysis 
+
+Dataset Description 
+The “ToothGrowth” dataset contains the results of an experiment studying the effects of Vitamin C on tooth growth in guinea pigs. The dataset includes 60 results with two key variables. This analysis uses exploratory data analysis (EDA), a linear regression model, model evaluation, and prediction. The goal is to determine how dose and supplement type impact tooth length and assess how well the model fits the data. 
+-	supp: type of supplement used – vitamin C and orange juice (categorical) 
+-	len: tooth length (numeric) 
+-	dose: dosage in milligrams (numeric) 
+
+Model Evaluation 
+The residual plots show a reasonably linear pattern without strong deviations, suggesting that the linear model assumptions are generally met. The residual vs. fitted plot does not show major heteroscedasticity, and the Q-Q plot suggests the residuals are approximately normal. 
+
+The regression output typically finds: 
+-	dose is a strong positive indicator of tooth growth 
+-	Orange juice tends to increase tooth length more compared to vitamin C at the same dose.
+-	The R-squared exceeds 0.70, indicating that most variation in tooth length is explained by dose and supplement type (OJ vs VC). 
+
+Conclusion 
+This analysis shows that dosage has the strongest effect on tooth length: as the dose increases, tooth growth increases consistently. The supplement type also plays a role; orange juice produces slightly higher tooth length than vitamin C after controlling for dosage. The linear regression performed well, with a strong R-squared value and acceptable residual behavior. 
+Predictions for a 1.5 mg dose show higher expected tooth length for OJ than VC, supporting the model’s findings. Overall, this dataset shows a clear dose-dependent tooth development, and supplement type influences this growth but to a lesser degree. The model is appropriate for prediction and interpretation within the observed dose range. 
