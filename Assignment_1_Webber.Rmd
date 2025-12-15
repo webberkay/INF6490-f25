@@ -1,0 +1,139 @@
+---
+title: 'Assignment #1: Data and Statistical Exploration in R'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Instructions:
+
+In this assignment, you will be using the "COVID-19 Global Dataset" that is provided for you. You should load the dataset into this R environment, explore the data, perform data cleaning techniques to ensure that your data is ready for statistical analysis, and create three different visualizations of your choice based on your observations from the data. Following your exploration, analysis, and visualizations, you should compile a 1-page write-up detailing your research questions, data insights, and outputs. Both the write-up and the .Rmd file should be uploaded to Canvas.
+
+Tips:
+
+1.  Ensure that the .CSV file is in the correct directory before attempting to load it in. I would encourage you to explore how to change "setwd" or change your working directory in R.
+2.  Outside of R, you can open the .CSV in excel to manually explore the columns/data points in R. This can also be done in R once the dataset is imported.
+
+------------------------------------------------------------------------
+
+Delve into the complexities of the COVID-19 pandemic by crafting one or more compelling research questions that align with your interests and contribute to our understanding of this global health crisis. Explore the vast array of topics and variables available within the dataset, from examining the effectiveness of public health measures to analyzing health disparities or investigating the economic impacts.
+
+Formulate one or more research questions that spark your curiosity and drive your analysis. Consider these prompts as starting points:
+
+1.  Public Health Measures: How effective were lockdowns, social distancing, and mask mandates in controlling the spread of COVID-19? Were there disparities in the implementation or enforcement of these measures?
+
+2.  Health Disparities: Are there differences in COVID-19 outcomes (e.g., infection rates, mortality) among different population groups? How do factors such as age, race, ethnicity, socioeconomic status, and underlying health conditions influence these disparities?
+
+3.  Economic Impacts: What were the economic consequences of the COVID-19 pandemic, and how did different industries and sectors fare? How did government policies and stimulus measures affect the economy?
+
+4.  Mental Health: How did the pandemic impact mental health and well-being, both in individuals and communities? What strategies were effective in addressing mental health challenges during this time?
+
+5.  Long-Term Consequences: What are the long-term health consequences of COVID-19 infection, and how will they impact individuals and healthcare systems?
+
+List your research question(s) below:
+
+1.  
+
+------------------------------------------------------------------------
+
+Run the code block below to load in the required libraries.
+
+```{r}
+
+library(ggplot2) # visualization package
+library(dplyr) # provides functions for summarizing and data manipulation
+library(readr) # provides function for reading in data via .CSV file
+library(janitor) # provides utility functions for data cleaning and manipulation
+library(ggthemes) # provides a collection of themes for customizing the appearance of plots created with ggplot2
+```
+
+Load in the dataset. Fill in the missing code and run the code block below.
+
+```{r}
+
+covid_data <- read_excel("C:/Users/webbe/OneDrive/Desktop/MSIS/INF 6490 (Statistics and Data Analysis)/covid_data.xlsx")
+
+```
+
+Explore the data structure. Exploring the data structure is a crucial step in data analysis because it provides valuable information about the data that can help you make informed decisions about how to clean, preprocess, and analyze it. Fill in the missing code and run the code block below. Take note of some things that you notice here.
+
+```{r}
+
+head("covid_data")
+summary("covid_data")
+str("covid_data")
+
+```
+
+Check for missing values. Fill in the missing code and run the code block below.
+
+```{r}
+
+sum(is.na(covid_data))
+
+```
+
+If there are missing values in the dataset, handle them accordingly. One popular way to handle any missing values is through "list wise deletion." This removes any rows containing missing values. Fill in the missing code and run the code block below.
+
+```{r}
+
+covid_data <- na.omit(covid_data)
+
+```
+
+There are several numerical variables in the COVID-19 dataset. Choose one or more numerical variables that are relevant to your research question(s). For example, if you're interested in exploring the relationship between population density and COVID-19 case rates, you might choose the columns 'population' and 'total_cases_per_1m_population' to create two separate histograms.
+
+Consider the following:
+
+1.  Bin Width - Adjust the bin width to get a clear and informative visualization. If the bin width is too small, the histogram may be too cluttered, and if it's too large, the distribution may be obscured.
+
+2.  Title and Labels - Use descriptive titles and labels for your plot.
+
+3.  Customization - Customize the appearance of your plot using ggplot2's aesthetics and themes.
+
+Once you've selected your variables, create a histogram to visualize the distribution of one or more variables in the code block below.
+
+```{r}
+
+
+
+```
+
+------------------------------------------------------------------------
+
+Create three distinct visualizations to effectively communicate your findings and insights from the COVID-19 dataset. Consider the following visualization options:
+
+1.  Bar Charts
+2.  Line Charts
+3.  Scatter Plots
+4.  Box Plots
+5.  Geospatial Map
+
+\*Remember to choose visualizations that align with your research questions and provide meaningful insights. Experiment with different visualization types and customization options to create clear and engaging visuals.
+
+Fill in the code blocks below to create your chosen visualizations.
+
+Visualization #1
+Which continent had the highest number of total confirmed cases?
+```{r}
+ggplot(covid_data, aes(x = continent, y = total_confirmed)) + geom_bar(stat = "identity") + labs(title = "Cases per Continent", x = "Continent", y= "Total Cases")
+
+
+```
+
+Visualization #2
+Which continent shows the widest interquartile range? 
+```{r}
+ggplot(covid_data, aes(x = continent, y = total_tests_per_1m_population)) + geom_boxplot(fill = "skyblue", color = "darkblue") + labs(title = "Tests per Million by Continent", x = "Continent", y = "Tests per Million")
+
+```
+
+Visualization #3
+What is the relationship between total confirmed cases and total confirmed deaths by continent? 
+```{r}
+ ggplot(covid_data, aes(x = total_confirmed, y = total_deaths, color = continent)) + geom_point(size = 2, alpha = 0.7) + labs(title = "Cases vs. Deaths by Continent", x = "Total Confirmed Cases", y = "Total Deaths")
+
+
+```
